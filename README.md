@@ -82,6 +82,8 @@ server {
 
 ### Writeup - API
 
+*151 solves / 10 pts*
+
 *Description: We have hidden a flag at our API endpoint! Happy hunting.*
 
 You can find the URL of API by checking dev tool's Network tab.
@@ -92,6 +94,8 @@ curl https://api.wectf.io/
 
 ### Writeup - UCSB
 
+*31 solves / 20 pts*
+
 *Description: Could you get footage of CCTV at <a href="https://www.google.com/maps/place/Ortega+Dining+Commons,+Isla+Vista,+CA+93117/" target="_blank">this location</a>? Send your Proof of Concept to @shou on Slack.  
 Hint 1: All CCTVs are protected by password, but how about services depending on them? Please don't spam anyone : )*
 
@@ -99,17 +103,23 @@ Search on Google and you would find [this](https://www.housing.ucsb.edu/dining/d
 
 ### Writeup - Note App (IDOR)
 
+*212 solves / 100 pts*
+
 *Description: Write your diary on Shou's note app so he can eavesdrop every single byte of it!!!*
 
 After login, visit http://na1.w-va.cf/note/1
 
 ### Writeup - RE
 
+*89 solves / 341 pts*
+
 *Description: Obviously, angr cannot solve this challenge. Note 1: wrap whatever you get with we{}*
 
 The code is obfuscated with YAK Pro. You can find unobfuscated one in this repo.
 
 ### Writeup - Faster Shop (Race Condition)
+
+*82 solves / 345 pts*
 
 *Description: Be as fast as possible to fast!*
 
@@ -131,11 +141,15 @@ time.sleep(2)
 
 ### Writeup - Customer (CSRF)
 
+*47 solves / 382 pts*
+
 *Description: Shou just told admins in his company not to click any link sent by unknowns but they are just too ignorant and assume Chrome is so secure…*
 
 You can simply generate payload with any existing tool.
 
 ### Writeup - lightSequel (SQL Injection)
+
+*24 solves / 1174 pts*
 
 *Description: Shou just learnt gRPC! Go play with his nasty API!*
 
@@ -159,6 +173,8 @@ md := metadata.Pairs("user_token", "1' OR (SELECT COUNT(*) FROM flags WHERE flag
 
 ### Writeup - KVaaS (Prototype Pollution)
 
+*21 solves / 1219 pts*
+
 *Description: Shou, after successfully created all those Apps, starts to get ballsier and claims that every database should use HTTP to communicate with the client. Thus, he rewrites Redis in his favorite language Javascript and announces he created first KVaaS.*
 
 ```
@@ -167,6 +183,8 @@ curl -X PUT http://host/backup
 ```
 
 ### Writeup - Note App 2 (XFS)
+
+*7 solves / 1635 pts*
 
 *Description: Shou just made a few updates to the former Note App: added logout function, allowed writing HTML in notes, and most importantly made everything more (un)secured. Note 1: Note App's issue is addressed here.*
 
@@ -234,6 +252,8 @@ test3.html
 
 ### Writeup - Note App 3 (POP Chain + Race Condition)
 
+*2 solves / 1942 pts*
+
 *Description: PHP is the most production-ready and CTF-challenge-ready language huh?*
 
 Generate POP chain to pwn `/api/Utils.inc:26` as to insert HTML without sanitization.
@@ -257,6 +277,8 @@ After getting XSS works, bypass by using an iframe and control the hash.
 
 ### Writeup - urlLongener (CRLF Injection + CORS Misconf)
 
+*8 solves / 1586 pts*
+
 *Description: Shou just wrote a short url generator to generate not so short urls Note 1: Flag is in the link admin created. Each user needs to be in the same IP and UA to get access their data. Note 2: Server is running on a patched version to compensate the NGINX issue. Code here is solely for providing some insights. Do not test your payload on it .*
 
 Exploit:
@@ -277,6 +299,8 @@ Access-Control-Allow-Origin: *
 Then fake your IP with `X-Forwarded-For` and all set : )
 
 ### Writeup - CORBra (XS-Search)
+
+*1 solve / 2000 pts*
 
 *Description: Shou stores one flag in his fancy CORBra Vault.  Hint 1: You may need CVE-2020-6442*
 
