@@ -310,7 +310,7 @@ Data:
 
 * There are 690+ teams from 16+ different countries registered their account. 
 * There are up to 251+ teams solved at least one challenge. 
-* Congrats to `st9846` `lsof -i:80` `watevr`, which are respectively first, second, and third place. 
+* Congrats to `st9846` `UWCTF`, `lsof -i:80`, which are respectively first, second, and third place. 
 
 What have I screwed up:
 
