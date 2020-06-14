@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Note App 3.0</title>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+            type="text/css"
+    />
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script src="/static/main.js"></script>
+    <style>
+        p {
+            font-size: 1.33em;
+            color: #666;
+            word-break: break-all;
+        }
+        .margintop{
+            margin-top: 100px;
+        }
+        .content{
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="ui container center margintop">
+    <a href="/home.html">< Back</a>
+    <script>
+        if (window.location.hash.substr(1) === 'safe_mode'){
+            safe_echo()
+        }
+    </script>
+    <h1>Note ID: <label id="note_id">
+        <label class="ui placeholder line" style="width: 500px">&nbsp;</label>
+    </label></h1>
+    <p>Author: <label id="note_author">
+        <label class="ui placeholder line" style="width: 500px">&nbsp;</label>
+    </label></p>
+    <div id="note_content" class="content">
+        <div class="ui placeholder">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </div>
+    <br>
+    <button class="ui button positive" onclick="$('#share').modal('show')"><i class="share icon"></i>Share</button>
+</div>
+
+<div class="ui modal" id="share">
+    <i class="close icon"></i>
+    <div class="header">
+        Share
+    </div>
+    <div class="content">
+        <div class="ui action input" style="width: 100%">
+            <input type="text" class="disabled" value="" id="share_url">
+            <button class="ui button "><i class="copy icon"></i>Copy</button>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui black positive button">
+            Okay
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    if (localStorage.getItem("safe_mode") === "1" && window.location.hash.substr(1) !== 'safe_mode')
+        window.location.href = '/home.html';
+    document.getElementById("share_url").value = window.location.href;
+    // shou: wait 1 second to make sure users see our cool skeleton screen
+    setTimeout(()=>get_note(window.location.hash.substr(1)), 1000);
+</script>
+</html>

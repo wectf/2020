@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Note App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="https://unpkg.com/pattern.css" rel="stylesheet">
+</head>
+<body>
+  <div class="w-90pc p-5 flex items-center justify-start">
+    <div class="pattern-dots-md red px-l5 py-5 max-w-20pc overflow-visible ml-5 md-ml-l5">
+      <h1 class="white fw-800 fs-l5 md-fs-xl3 lh-1">
+        Da<br>
+        Note<br>
+        App 1.0
+      </h1>
+    </div>
+  </div>
+
+  <div>
+
+  <form class="container login-box" method="post">
+  {% if error_msg %}
+    <div class="alert alert-warning">
+      {{ error_msg }}
+    </div>
+  {% endif %}
+  <div class="form-group">
+    <strong>Username</strong>
+    <input class="form-control" name="username" placeholder="Enter Username">
+    <small class="form-text text-muted">We'll never not share your info with anyone else 👀</small>
+  </div>
+  <div class="form-group">
+    <strong>Password</strong>
+    <input type="password" class="form-control" name="password" placeholder="Password">
+  </div>
+  <button type="submit" class="btn btn-primary">Login / Register</button>
+  </form>
+  </div>
+
+</form>
+</body>
+
+<style>
+    .login-box{
+        margin-top: 100px;
+        max-width: 800px;
+    }
+    body {
+        background: #222;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+    }
+    .py-5 {
+        color: #E7393F !important;
+    }
+    h1 {
+        color: #fff;
+        font-size:80px;
+        font-weight: 800;
+        margin: 40px;
+    }
+</style>
+</html>

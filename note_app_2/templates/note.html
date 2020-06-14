@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Note App 2.0</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<input hidden name="useless_csrf_token" value="we{notaflag}"/>
+<div class="container note-box">
+    <a href="/">< Back</a>
+    <h1>Note ID: {{ note_id }}</h1>
+    <div>{{ content | safe }}</div>
+</div>
+</body>
+
+<style>
+    .note-box{
+        margin-top: 100px;
+        max-width: 800px;
+    }
+    body {
+        background: #222;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+    }
+    h1 {
+        color: #fff;
+        font-size:60px;
+        font-weight: 800;
+    }
+    a {
+        color: #ff7f50 !important;
+    }
+</style>
+</html>

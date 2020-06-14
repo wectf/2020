@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Note App 3.0</title>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+            type="text/css"
+    />
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script src="/static/main.js"></script>
+    <style type="text/css">
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-font-smoothing: grayscale;
+        }
+
+        .masthead.segment {
+            min-height: 600px;
+            padding: 1em 0em;
+        }
+
+        .masthead .logo.item img {
+            margin-right: 1em;
+        }
+
+        .masthead .ui.menu .ui.button {
+            margin-left: 0.5em;
+        }
+
+        .masthead h1.ui.header {
+            margin-top: 2em;
+            margin-bottom: 0em;
+            font-size: 4em;
+            font-weight: normal;
+        }
+
+        .masthead h2 {
+            font-size: 1.7em;
+            font-weight: normal;
+        }
+
+        .ui.vertical.stripe {
+            padding: 8em 0em;
+        }
+
+        .ui.vertical.stripe h3 {
+            font-size: 2em;
+        }
+
+        .ui.vertical.stripe .button + h3,
+        .ui.vertical.stripe p + h3 {
+            margin-top: 3em;
+        }
+        .ui.vertical.stripe p {
+            font-size: 1.33em;
+        }
+
+        .footer.segment {
+            padding: 5em 0em;
+        }
+
+        .secondary.pointing.menu .toc.item {
+            display: none;
+        }
+
+        @media only screen and (max-width: 700px) {
+            .secondary.pointing.menu .item {
+                display: none;
+            }
+
+            .secondary.pointing.menu .toc.item {
+                display: block;
+            }
+
+            .masthead.segment {
+                min-height: 350px;
+            }
+
+            .masthead h1.ui.header {
+                font-size: 2em;
+                margin-top: 1.5em;
+            }
+
+            .masthead h2 {
+                margin-top: 0.5em;
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="pusher">
+    <div class="ui inverted vertical masthead center aligned segment">
+        <div class="ui container">
+            <div class="ui large secondary inverted pointing menu">
+                <a class="toc item"><i class="sidebar icon"></i></a>
+                <a class="active item">Home</a>
+                <a class="item" href="https://uv.wectf.io/?chall=note_app_3">Report Issue</a>
+                <a class="item">Useless Button</a>
+                <div class="right item">
+                    <a class="ui inverted button" onclick="$('#login').modal('show')">Log in</a>
+                    <a class="ui inverted button" onclick="$('#register').modal('show')">Sign Up</a>
+                </div>
+            </div>
+        </div>
+        <div class="ui text container">
+            <h1 class="ui inverted header">Note App 3.0</h1>
+            <h2>The most secure and advanced note publishing application.</h2>
+            <div class="ui huge primary button">
+                Get Started <i class="right arrow icon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="ui vertical stripe segment">
+        <div class="ui middle aligned stackable grid container">
+            <div class="row">
+                <div class="eight wide column">
+                    <h3 class="ui header">Useless Sub Title</h3>
+                    <p>
+                        We can give your company superpowers to do things that they
+                        never thought possible. Let us delight your customers and
+                        empower your needs...through pure data analytics.
+                    </p>
+                    <h3 class="ui header">More Useless Sub Title</h3>
+                    <p>
+                        Yes that's right, you thought it was the stuff of dreams, but
+                        even bananas can be bioengineered.
+                    </p>
+                </div>
+                <div class="six wide right floated column">
+                    <img
+                            class="ui large bordered rounded image"
+                            src="/static/panda.svg"
+                    />
+                </div>
+            </div>
+            <div class="row">
+                <div class="center aligned column">
+                    <a class="ui huge button">Useless Button</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui inverted vertical footer segment">
+        <div class="ui container">
+            <div
+                    class="ui stackable inverted divided equal height stackable grid"
+            >
+                <div class="three wide column">
+                    <h4 class="ui inverted header">About</h4>
+                    <div class="ui inverted link list">
+                        <a class="item" href="#">Sitemap</a>
+                        <a class="item" href="#">Contact Us</a>
+                        <a class="item" href="#">Religious Ceremonies</a>
+                        <a class="item" href="#">Gazebo Plans</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header">Services</h4>
+                    <div class="ui inverted link list">
+                        <a class="item" href="#">Banana Pre-Order</a>
+                        <a class="item" href="#">DNA FAQ</a>
+                        <a class="item" href="#">How To Access</a>
+                        <a class="item" href="#">Favorite X-Men</a>
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <h4 class="ui inverted header">Footer Header</h4>
+                    <p>
+                        Extra space for a call to action inside the footer that could
+                        help re-engage users.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ui modal" id="login">
+    <i class="close icon"></i>
+    <div class="header">
+        Login
+    </div>
+    <div class="content">
+        <div class="ui error message" id="login_error" style="display: none">
+            <div class="header">
+                There were some errors with your submission
+            </div>
+            <ul class="list">
+                <li id="login_error_info"></li>
+            </ul>
+        </div>
+        <form class="ui large form">
+            <div class="ui stacked segment">
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input id="login_username" placeholder="Username" type="text" />
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input id="login_password" placeholder="Password" type="password" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            Leave
+        </div>
+        <div class="ui right labeled icon button" onclick="auth()">
+            Start the Journey
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+
+<div class="ui modal" id="register">
+    <i class="close icon"></i>
+    <div class="header">
+        Sign Up
+    </div>
+    <div class="content">
+        <div class="ui info message" >
+            <div class="header">
+                Thank you for selecting us, here are a few rules you need to follow:
+            </div>
+            <ul class="list">
+                <li>
+                    8 chars <= username <= 12 chars
+                </li>
+                <li>
+                    Though we encrypt your password with 2 sha1 + salt, please use a random password generated or just 123.
+                </li>
+                <li>
+                    // shou: That's all I guess.
+                </li>
+            </ul>
+        </div>
+        <div class="ui error message" id="register_error" style="display: none">
+            <div class="header">
+                There were some errors with your submission
+            </div>
+            <ul class="list">
+                <li id="register_error_info"></li>
+            </ul>
+        </div>
+        <form class="ui large form">
+            <div class="ui stacked segment">
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input id="register_username" placeholder="Username" type="text" />
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input id="register_password" placeholder="Password" type="password" />
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui checkbox">
+                        <input type="checkbox" tabindex="0" class="hidden">
+                        <label>Just another useless checkbox to make UI better</label>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            Leave
+        </div>
+        <div class="ui right labeled icon button" onclick="auth('register')">
+            Start the Journey
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<script>
+    if (localStorage.getItem("is_auth") === "1")
+        window.location.href = "/home.html"
+</script>
+</html>

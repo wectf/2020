@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Service</title>
+</head>
+<body>
+<input hidden name="useless_csrf_token" value="we{notaflag}"/>
+<div class="container box">
+    <h1>Welcome!</h1>
+    <a href="https://uv.wectf.io">Report Issues</a>
+    {% if no_flag %}
+        <div>You are not eligible to view flag!</div>
+    {% else %}
+        <div >Here's the flag: {{ flag }}</div>
+    {% endif %}
+    <br>
+    <form action="/promote" method="post">
+        <h2>Promote a user to a flag viewer</h2>
+        <input name="user_token" placeholder="token of the user, which lies in the cookie" style="width: 100%"/>
+        <input type="submit" style="margin-top: 20px;"/>
+    </form>
+</div>
+</body>
+
+<style>
+    .box{
+        max-width: 800px;
+        margin: 100px auto 0 auto;
+    }
+</style>
+</html>

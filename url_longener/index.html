@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>URL Longener</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <style>
+        html, body {
+            background-color: #fff;
+            color: #636b6f;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 200;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .full-height {
+            height: 100vh;
+        }
+
+        .flex-center {
+            display: flex;
+            justify-content: center;
+        }
+
+        .position-ref {
+            position: relative;
+        }
+
+        .top-right {
+            z-index: 100000;
+            position: absolute;
+            right: 10px;
+            top: 18px;
+        }
+
+        .content {
+            text-align: center;
+        }
+
+        .title {
+            font-size: 84px;
+        }
+
+        .links > a {
+            color: #636b6f;
+            padding: 0 25px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: .1rem;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .m-b-md {
+            margin-bottom: 30px;
+            margin-top: 30vh;
+        }
+        input {
+            width: 40vw;
+            min-width: 300px;
+            padding: 7px;
+            font-size: 18px;
+        }
+
+        input:focus {
+            outline: -webkit-focus-ring-color auto 0;
+        }
+        .button {
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+<a href="https://uv.wectf.io" style="text-align: center" class="top-right">Report Issue</a>
+<div class="flex-center position-ref full-height">
+
+    <form action="/create_links_api" class="content">
+        <div class="title m-b-md">
+            URL Longener
+        </div>
+
+        <label>
+            <input placeholder="Your URL" id="url" name="link"/>
+            <input type="submit" id="submit"/>
+        </label>
+        <br><br>
+        <label>{{result}}</label>
+    </form>
+
+</div>
+</body>
+</html>
+

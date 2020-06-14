@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package no_sequel;
+service Auth {
+  rpc Login (AuthRequest) returns (AuthReply) {}
+  rpc Register (AuthRequest) returns (AuthReply) {}
+}
+
+message AuthRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message AuthReply {
+  string token = 1;
+  int32 id = 2;
+}
+
+service Srv {
+  rpc GetLoginHistory (SrvRequest) returns (SrvReply) {}
+}
+
+message SrvRequest {
+}
+
+message SrvReply {
+  repeated string ip = 1;
+}

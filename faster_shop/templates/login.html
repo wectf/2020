@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Faster's Shop</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<form class="container login-box" method="post">
+  <h1>Login</h1>
+  {% if error_msg %}
+    <div class="alert alert-warning">
+      {{ error_msg }}
+    </div>
+  {% endif %}
+  <div class="form-group">
+    <label>Username</label>
+    <input class="form-control" name="username" placeholder="Enter Username">
+    <small class="form-text text-muted">We'll never not share your info with anyone else 👀</small>
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" class="form-control" name="password" placeholder="Password">
+  </div>
+  <button type="submit" class="btn btn-primary">Login / Register</button>
+</form>
+</body>
+
+<style>
+    .login-box{
+        margin-top: 100px;
+        max-width: 800px;
+    }
+</style>
+</html>

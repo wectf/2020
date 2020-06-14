@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Faster's Shop</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<input hidden name="useless_csrf_token" value="we{notaflag}"/>
+<div class="container box">
+    <h1>Hello Our Precious Customers!</h1>
+    <div class="alert alert-primary">You have {{ balance }} bucks</div>
+    <h3>Faster's Shop Produce</h3>
+    <label>Super fresh!</label>
+    <table class="table" style="background: #eee">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Calories</th>
+            <th scope="col">Price ($)</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>🥛 Galois Milk</td>
+            <td>10</td>
+            <td><del style="color: #999">10</del> 5 <label style="color:red;">(50% OFF!)</label></td>
+            <td>
+                <form action="/buy/1" method="post">
+                    <input type="submit" class="btn btn-primary btn-sm" value="Buy" />
+                </form>
+            </td>
+
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>🥗 Alpaca Salad</td>
+            <td>100</td>
+            <td>20</td>
+            <td>
+                <form action="/buy/2" method="post">
+                    <input type="submit" class="btn btn-primary btn-sm" value="Buy" />
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>🚩 Fancy <strong>Flag</strong></td>
+            <td>5e200</td>
+            <td>21</td>
+            <td>
+                <form action="/buy/3" method="post">
+                    <input type="submit" class="btn btn-primary btn-sm" value="Buy" />
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h3>Purchase History</h3>
+    <label>Tank you!</label>
+    <table class="table" style="background: #eee">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Product ID</th>
+            <th scope="col">Amount Paid ($)</th>
+            <th scope="col">Purchase Date</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in purchase_log %}
+            <tr>
+                <th scope="row">{{ i.id }}</th>
+                <td>{{ i.product_id }}</td>
+                <td>{{ i.paid_amount }}</td>
+                <td>{{ i.v_date }}</td>
+                <td>
+                    <form action="/sell/{{ i.id }}" method="post">
+                        <input type="submit" class="btn btn-primary btn-sm" value="Sell" />
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+
+<style>
+    .box{
+        margin-top: 100px;
+        max-width: 800px;
+    }
+</style>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Note App 3.0</title>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+            type="text/css"
+    />
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script src="/static/main.js"></script>
+    <style>
+        p {
+            font-size: 1.33em;
+            color: #666;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+<div class="ui huge menu">
+    <div class="ui container">
+        <a class="header item" href="#">Note App 3.0</a>
+        <a class="active item" href="#">Dashboard</a>
+        <a class="item" href="#" onclick="$('#add_note').modal('show')">Add Note</a>
+        <a class="item" href="#">Useless Button</a>
+        <div class="right item">
+            <a class="ui button positive" onclick="logout()">Logout</a>
+        </div>
+    </div>
+</div>
+<div class="ui center container" >
+    <div class="ui card" style="width: 100%; cursor: pointer" onclick="window.location.href='/note.html#safe_mode'">
+        <div class="content">
+            <p><script>safe_echo()</script></p>
+        </div>
+    </div>
+    <div class="ui info message" style="display: none" id="notes_info">
+        <div class="header" id="notes_info_content">
+        </div>
+    </div>
+    <div id="notes"></div>
+    <script>get_user_notes();</script>
+</div>
+
+<div class="ui modal" id="add_note">
+    <i class="close icon"></i>
+    <div class="header">
+        Add Note
+    </div>
+    <div class="content">
+        <div class="ui info message" >
+            <div class="header">
+                Thank you for selecting us, here are a few rules you need to follow:
+            </div>
+            <ul class="list">
+                <li>
+                    0 chars <= content <= 500 chars
+                </li>
+                <li>
+                    // shou: That's all I guess.
+                </li>
+            </ul>
+        </div>
+        <div class="ui error message" id="add_note_error" style="display: none">
+            <div class="header">
+                There were some errors with your submission
+            </div>
+            <ul class="list">
+                <li id="add_note_error_info"></li>
+            </ul>
+        </div>
+        <form class="ui large form">
+            <div class="ui stacked segment">
+                <div class="field">
+                    <textarea id="add_note_content"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            Leave
+        </div>
+        <div class="ui right labeled icon button" onclick="add_note()">
+            Submit
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+<script>check_auth()</script>
+</body>
+</html>

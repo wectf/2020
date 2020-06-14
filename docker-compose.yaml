@@ -1,0 +1,191 @@
+version: '3.7'
+services:
+  corbra:
+    restart: always
+    image: corbra
+    build:
+      context: "./corbra"
+      dockerfile: ./Dockerfile
+    environment:
+      FLAG: "we{00000000-0000-0000-0000-000000000000@demo-flag}"
+      ADMIN_TOKEN: "9pFrqCEyagsCbabGamT"
+    ports:
+     - "1000:80"
+    networks:
+      default:
+        ipv4_address: 172.32.1.2
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 10240M
+  
+  customer_service:
+    restart: always
+    image: customer_service
+    build:
+      context: "./customer_service"
+      dockerfile: ./Dockerfile
+    environment:
+      FLAG: "we{00000000-0000-0000-0000-000000000000@demo-flag}"
+      ADMIN_PASSWORD: "bi6yQTB5nhBi7CaSMYF"
+    ports:
+     - "1001:1001"
+    networks:
+      default:
+        ipv4_address: 172.32.2.2
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 10240M
+  
+  faster_shop:
+    restart: always
+    image: faster_shop
+    build:
+      context: "./faster_shop"
+      dockerfile: ./Dockerfile
+    environment:
+      FLAG: "we{00000000-0000-0000-0000-000000000000@demo-flag}"
+    ports:
+     - "1002:1002"
+    networks:
+      default:
+        ipv4_address: 172.32.3.2
+    deploy:
+      resources:
+        limits:
+          cpus: '8'
+          memory: 10240M
+
+  kvaas:
+    restart: always
+    image: kvaas
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /run
+    build:
+      context: "./kvaas"
+      dockerfile: ./Dockerfile
+      args: 
+        FLAG: "we{00000000-0000-0000-0000-000000000000@demo-flag}"
+    ports:
+     - "1003:1003"
+    networks:
+      default:
+        ipv4_address: 172.32.4.2
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 10240M
+
+  light_sequel:
+    restart: always
+    image: light_sequel
+    build:
+      context: "./light_sequel"
+      dockerfile: ./Dockerfile
+    environment: 
+      FLAG: "we{00000000-0000-0000-0000-000000000000@demo-flag}"
+    ports:
+     - "1004:1004"
+    networks:
+      default:
+        ipv4_address: 172.32.5.2
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 10240M
+
+
+  note_app:
+    restart: always
+    image: note_app
+    build:
+      context: "./note_app"
+      dockerfile: ./Dockerfile
+    environment: 
+      FLAG: "we{00000000-0000-0000-0000-000000000000@demo-flag}"
+    ports:
+     - "1005:1005"
+    networks:
+      default:
+        ipv4_address: 172.32.6.2
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 10240M
+
+  note_app_2:
+    restart: always
+    image: note_app_2
+    build:
+      context: "./note_app_2"
+      dockerfile: ./Dockerfile
+    environment: 
+      FLAG: "we{00000000-0000-0000-0000-000000000000@demo-flag}"
+      PASSWORD: "Lq#QHMnpyk6Y+.]"
+    ports:
+     - "1006:1006"
+    networks:
+      default:
+        ipv4_address: 172.32.7.2
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 10240M
+
+  note_app_3:
+    restart: always
+    image: note_app_3
+    build:
+      context: "./note_app_3"
+      dockerfile: ./Dockerfile
+    environment: 
+      FLAG: "we{00000000-0000-0000-0000-000000000000@demo-flag}"
+      ADMIN_PASSWORD: "2bAc44Kv4Ps4wA7y"
+      DB_HOST: "1.1.1.1"
+      DB_UN: "na3"
+      DB_PW: "xxx"
+      DB_NAME: "wectf-na3"
+    ports:
+     - "1007:80"
+    networks:
+      default:
+        ipv4_address: 172.32.8.2
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 10240M
+
+
+  url_longener:
+    restart: always
+    image: url_longener
+    build:
+      context: "./url_longener"
+      dockerfile: ./Dockerfile
+    ports:
+     - "1008:1008"
+    networks:
+      default:
+        ipv4_address: 172.32.9.2
+    deploy:
+      resources:
+        limits:
+          cpus: '12'
+          memory: 10240M
+
+networks:
+  default:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.32.0.0/16
