@@ -321,7 +321,58 @@ which produce a JSON with warning HTML that disrupts the following check:
 ```c
 // Simplified code from Chromium
 // Full code: https://source.chromium.org/chromium/chromium/src/+/master:services/network/cross_origin_read_blocking.cc;l=459
-int SniffForJSON(char* data, int size);
+int SniffForJSON(char* data, int size) {
+  enum {
+    kStartState,
+    kLeftBraceState,
+    kLeftQuoteState,
+    kEscapeState,
+    kRightQuoteState,
+  } state = kStartState;
+
+  for (int i = 0; i < size; ++i) {
+    const char c = data[i];
+    if (state != kLeftQuoteState && state != kEscapeState) {
+      // Whitespace is ignored (outside of string literals)
+      if (c == ' ' || c == '\t' || c == '\r' || c == '\n')
+        continue;
+    } else {
+      // Inside string literals, control characters should result in rejection.
+      if ((c >= 0 && c < 32) || c == 127)
+        return 0;
+    }
+
+    switch (state) {
+      case kStartState:
+        if (c == '{')
+          state = kLeftBraceState;
+        else
+          return 0;
+        break;
+      case kLeftBraceState:
+        if (c == '"')
+          state = kLeftQuoteState;
+        else
+          return 0;
+        break;
+      case kLeftQuoteState:
+        if (c == '"')
+          state = kRightQuoteState;
+        else if (c == '\\')
+          state = kEscapeState;
+        break;
+      case kEscapeState:
+        // Simplification: don't bother rejecting hex escapes.
+        state = kLeftQuoteState;
+        break;
+      case kRightQuoteState:
+        if (c == ':')
+          return 2;
+        return 0;
+    }
+  }
+  return 1;
+}
 ```
 
 Note that CORBra-- is considered to be solved if participants reach this step and managed to get cache diff works on same origin. 
