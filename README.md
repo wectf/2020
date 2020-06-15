@@ -320,6 +320,7 @@ which produce a JSON with warning HTML that disrupts the following check:
 
 ```c
 // Simplified code from Chromium
+// Full code: https://source.chromium.org/chromium/chromium/src/+/master:services/network/cross_origin_read_blocking.cc;l=459
 int SniffForJSON(char* data, int size);
 ```
 
