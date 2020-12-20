@@ -5,7 +5,7 @@ Thank you all for participating! This README contains my writeup sketches. You c
 ### Run Challenges Locally
 
 ```shell
-git clone https://github.com/shouc/wectf-2020
+git clone https://github.com/wectf/2020
 cd wectf-2020 && docker-compose up
 ```
 
