@@ -6,7 +6,7 @@ Thank you all for participating! This README contains my writeup sketches. You c
 
 ```shell
 git clone https://github.com/wectf/2020
-cd wectf-2020 && docker-compose up
+cd 2020 && docker-compose up
 ```
 
 The mapping is as following
